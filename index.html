@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Yadav - Sleek Portfolio</title>
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (for professional icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/icomoon/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+  <div class="container nav-container">
+    <div class="nav-logo">
+      <a href="#home">Vivek</a>
+    </div>
+
+    <!-- checkbox (keeps same id) -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+
+    <!-- hamburger label (keeps same class) -->
+    <label for="menu-toggle" class="hamburger" aria-label="Toggle navigation" role="button">
+      <!-- simple CSS bars (no external icons required) -->
+      <span class="bar bar-1"></span>
+      <span class="bar bar-2"></span>
+      <span class="bar bar-3"></span>
+    </label>
+
+    <!-- nav links (keeps same class) -->
+    <div class="nav-menu">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link nav-link-contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Home/Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Hello, I'm</p>
+                <h1 class="hero-title">Vivek Yadav</h1>
+                <h2 class="hero-role">Ai & Software Engineer</h2>
+                <p class="hero-bio">Building scalable and robust web applications, and Ai project, with a focus on clean code and user experience. Let's create something amazing together.</p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">View Projects <i class="icon-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-avatar-wrapper">
+                <!-- Placeholder image for the avatar -->
+                <img src="images/Vivek.png" alt="Vivek Yadav Avatar" class="hero-avatar" onerror="this.src='https://placehold.co/350x350/1e3a8a/ffffff?text=V.Y.'">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h3 class="section-title">About Me</h3>
+            <p class="section-subtitle">A brief look into my background and what drives me.</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a passionate software engineer with <strong>1+ years of professional experience</strong> in developing and deploying full-stack solutions. My expertise lies primarily in the MERN stack (MongoDB, ), but I am highly adaptable and enjoy working with modern frameworks like Python .</p>
+                   
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <i class="icon-package stat-icon"></i>
+                        <h4 class="stat-number">4+</h4>
+                        <p class="stat-label">Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="icon-calendar stat-icon"></i>
+                        <h4 class="stat-number">1+</h4>
+                        <p class="stat-label">Years Experience</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="icon-zap stat-icon"></i>
+                        <h4 class="stat-number">Full Stack</h4>
+                        <p class="stat-label">Primary Role</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section section-light-bg">
+        <div class="container">
+            <h3 class="section-title">My Technical Toolkit</h3>
+            <p class="section-subtitle">Technologies and tools I use to build Ai related projects .</p>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4><i class="icon-code"></i> Frontend</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">Next.js</span>
+                        <span class="skill-item">Angular</span>
+                        <span class="skill-item">TypeScript</span>
+                        <span class="skill-item">Tailwind CSS</span>
+                     
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="icon-server"></i> Backend</h4>
+                    <div class="skill-list"></div>
+                        <span class="skill-item">Python (Django/Flask)</span>
+                        <span class="skill-item"> APIs key </span>
+                        
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="icon-database"></i> Databases & DevOps</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">Git/GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h3 class="section-title">Featured Projects</h3>
+            <p class="section-subtitle">Showcasing recent work and technical expertise.</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image-placeholder project-color-1">
+                        <i class="icon-layout"></i>
+                        <p>calculator</p>
+                    </div>
+                    <div class="project-info">
+                        <h4>calculator</h4>
+                        <p class="project-description">A multi-time to take value and create new value.</p>                    <div class="project-tech">
+                            <span class="tech-tag">python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo <i class="simple-calculator"></i></a>
+                            <a href="#" class="project-link">GitHub <i class="https://github.com/VivekYadav-codes/simple-calculator.git"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-placeholder project-color-2">
+                        <i class="icon-message-square"></i>
+                        <p>Portfolio</p>
+                    </div>
+                    <div class="project-info">
+                        <h4>Portfolio</h4>
+                        <p class="project-description"> A Featured of this Portfolio web to seen to my project and connect to me ask any questin and how to work and present and what are the work & new project to see to this web .</p>              <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">css</span>
+                            <span class="tech-tag">python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo <i class="http://127.0.0.1:3000/index.html"></i></a>
+                            <a href="#" class="project-link">GitHub <i class="https://github.com/VivekYadav-codes/protofilio_web.git"></i></a>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-light-bg">
+        <div class="container">
+            <h3 class="section-title">Let's Connect</h3>
+            <p class="section-subtitle">I'm always open to new opportunities and collaborations. Get in touch!</p>
+            
+            <div class="contact-content">
+                <div class="contact-info-card">
+                    <h4>Direct Contact</h4>
+                    <p>I typically respond within 24 hours.</p>
+
+                    <div class="info-item">
+                        <i class="icon-mail contact-icon"></i>
+                        <a href="mailto:vy1222071936@gmail.com">vy1222071936@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon-phone contact-icon"></i>
+                        <a href="tel:+919648220882">+91 9648220882</a>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon-linkedin contact-icon"></i>
+                        <a href="https://www.linkedin.com/in/vivek-yadav-53b935325?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B0Tl0ohndQSWydfJJ5CxRRw%3D%3D" target="_blank">LinkedIn Profile</a>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon-github contact-icon"></i>
+                        <a href="https://github.com/VivekYadav-codes/protofilio_web" target="_blank">GitHub Profile</a>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <h4>Send Me a Message</h4>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Vivek Yadav. All rights reserved. | Designed for excellence.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking a link
+                document.getElementById('menu-toggle').checked = false;
+            });
+        });
+    </script>
+</body>
+</html>

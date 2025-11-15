@@ -1,0 +1,838 @@
+/* -------------------------------------- */
+/* 1. Base, Variables, and Utilities */
+/* -------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Palette */
+    --color-primary: #1e3a8a; /* Deep Navy Blue */
+    --color-primary-light: #3b82f6; /* Vibrant Accent Blue */
+    --color-text-dark: #1f2937; /* Dark Gray Text */
+    --color-text-light: #4b5563; /* Medium Gray Text */
+    --color-background-main: #f9fafb; /* Off-White Background */
+    --color-background-card: # ffffff; /* Pure White Card Background */
+    --color-border: #e5e7eb; /* Light Border Gray */
+    --color-white: #ffffff;
+    
+    /* Shadows (More depth) */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 20px rgba(0,0,0,0.15); /* Slightly darker/larger for impact */
+    --shadow-primary: 0 15px 30px rgba(59, 130, 246, 0.6);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.75; /* Improved readability for body text */
+    color: var(--color-text-dark);
+    background-color: var(--color-background-main);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 6rem 0;
+    transition: background-color 0.4s ease;
+}
+
+.section-light-bg {
+    background-color: var(--color-background-card);
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    text-align: center;
+    color: var(--color-text-light);
+    margin-bottom: 4rem;
+}
+
+/* -------------------------------------- */
+/* 2. Navigation & Hamburger Menu */
+/* -------------------------------------- */
+/* NAVBAR: replacement block (keeps original class names) */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  padding: 1rem 0;
+  box-shadow: var(--shadow-md);
+}
+
+/* container layout */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* logo (unchanged) */
+.nav-logo a {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* hide native checkbox visually but keep it functional */
+.menu-toggle {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* hamburger (visible on mobile only) */
+.hamburger {
+  display: none;              /* will be shown in responsive rules */
+  width: 40px;
+  height: 36px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1100;              /* above nav-menu */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* three bars inside hamburger */
+.hamburger .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--color-primary);
+  transform-origin: center;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  position: absolute;
+  left: 0;
+}
+
+/* positions for the bars */
+.hamburger .bar-1 { top: 6px; }
+.hamburger .bar-2 { top: 16px; }
+.hamburger .bar-3 { top: 26px; }
+
+/* nav-menu default (desktop) */
+.nav-menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  transition: max-height 0.45s cubic-bezier(0.2,0.9,0.2,1), padding 0.3s;
+}
+
+/* nav links unchanged */
+.nav-link {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+/* remove pill underline on call-to-action*/
+.nav-link-contact {
+  background-color: var(--color-primary-light);
+  color: var(--color-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+}
+
+/* ---------------------------
+   Mobile behavior
+   --------------------------- */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  /* stack layout so logo left, hamburger right */
+  .nav-container {
+    align-items: center;
+  }
+
+  /* mobile: nav-menu becomes a hidden dropdown */
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--color-background-card);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-height: 0;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .nav-link {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .nav-link-contact {
+    margin: 1rem 1.25rem;
+  }
+
+  /* When checkbox is checked, show menu */
+  /* This selector relies on the checkbox being before the .nav-menu (it is in the HTML above) */
+  #menu-toggle:checked ~ .hamburger .bar-1 {
+    transform: translateY(10px) rotate(45deg);
+  }
+  #menu-toggle:checked ~ .hamburger .bar-2 {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  #menu-toggle:checked ~ .hamburger .bar-3 {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  /* reveal the dropdown by expanding max-height and adding padding */
+  #menu-toggle:checked ~ .nav-menu {
+    max-height: 480px; /* large enough for links—adjust if you add more links */
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+
+/* -------------------------------------- */
+/* 3. Hero Section and Buttons */
+/* -------------------------------------- */
+.hero-section {
+    padding-top: 12rem;
+    padding-bottom: 6rem;
+    background-color: var(--color-background-main);
+}
+
+.hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    opacity: 0;
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.hero-role {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    animation: slideInLeft 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+    margin-bottom: 1.5rem;
+}
+
+.hero-bio {
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.hero-avatar-wrapper {
+    flex-shrink: 0;
+    perspective: 1000px; 
+}
+
+.hero-avatar {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid var(--color-white);
+    box-shadow: 0 0 0 4px var(--color-primary-light), var(--shadow-lg);
+    transition: transform 0.5s ease-in-out;
+    opacity: 0;
+    animation: popIn 0.8s ease-out 0.4s forwards;
+}
+
+.hero-avatar:hover {
+    transform: rotateY(15deg) scale(1.05);
+}
+
+/* Buttons (Universal Styles) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Ensures text is centered if full width */
+    gap: 0.75rem;
+    padding: 0.9rem 2.2rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    min-width: 150px; /* Ensure some minimum size */
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary-light);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-primary); 
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+}
+
+
+/* -------------------------------------- */
+/* 4. About & Stat Cards */
+/* -------------------------------------- */
+.about-content {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.about-text {
+    flex: 2;
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    line-height: 1.7; 
+}
+
+.about-text p {
+    margin-bottom: 1.5rem; /* Spacing between paragraphs */
+}
+
+.about-stats {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    background: var(--color-background-card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    border-left: 5px solid var(--color-primary-light);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: scale(1.05) rotateZ(1deg); /* Slight rotation and lift */
+    box-shadow: 0 10px 20px rgba(30, 58, 138, 0.1);
+    border-left: 5px solid var(--color-primary);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary-light);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card:hover .stat-icon {
+    color: var(--color-primary);
+}
+
+
+/* -------------------------------------- */
+/* 5. Skills Section & Items */
+/* -------------------------------------- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.skill-category {
+    background: var(--color-background-card);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.skill-category h4 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.skill-category h4 i {
+    color: var(--color-primary-light);
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-item {
+    background: #e0f7fa; 
+    color: var(--color-primary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 1px solid #bae6fd;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+/* Animated Skill Hover */
+.skill-item:hover {
+    background: var(--color-primary-light);
+    color: var(--color-white);
+    transform: scale(1.1) rotateZ(-2deg);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+}
+
+/* -------------------------------------- */
+/* 6. Projects Section & Cards */
+/* -------------------------------------- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.project-card {
+    background: var(--color-background-card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    perspective: 1000px; 
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) rotateX(2deg); /* 3D parallax lift */
+    box-shadow: 0 20px 30px rgba(30, 58, 138, 0.25);
+    border: 1px solid var(--color-primary-light);
+}
+
+.project-image-placeholder {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background-color 0.4s ease;
+}
+
+.project-color-1 { background-color: var(--color-primary-light); } 
+.project-color-2 { background-color: #f97316; } 
+.project-color-3 { background-color: #8b5cf6; } 
+
+.project-image-placeholder i {
+    font-size: 3.5rem;
+    margin-bottom: 0.75rem;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image-placeholder i {
+    transform: scale(1.1) rotateZ(5deg);
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-info h4 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem; 
+}
+
+.project-description {
+    margin-bottom: 1rem; 
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem; 
+}
+
+.tech-tag {
+    background: #eff6ff;
+    color: var(--color-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.tech-tag:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    margin-top: 0.5rem; /* Adjusted for better separation */
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--color-primary-light);
+    transform: translateX(3px);
+}
+
+/* -------------------------------------- */
+/* 7. Contact Section */
+/* -------------------------------------- */
+.contact-section {
+    padding-bottom: 8rem;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--color-background-card);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h4 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info-card h4 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.contact-info-card p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-light);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 0.5rem;
+}
+
+.info-item:hover {
+    background-color: #f7f9fd;
+    transform: translateX(5px);
+}
+
+.info-item a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: var(--color-primary-light);
+}
+
+.form-group {
+    margin-bottom: 1.5rem; 
+}
+
+.form-group label {
+    display: block; 
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-dark);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%; 
+    padding: 0.75rem 1rem; 
+    font-size: 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 0.75rem;
+    background-color: #fcfcfd; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+    color: var(--color-text-dark);
+}
+
+.contact-form textarea {
+    resize: vertical; 
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25); 
+    background-color: var(--color-white);
+    outline: none;
+}
+
+.btn-submit {
+    margin-top: 1rem;
+    width: 100%; /* FULL-WIDTH Button */
+    font-size: 1.1rem; 
+    padding: 1rem 2.2rem;
+}
+
+
+/* -------------------------------------- */
+/* 8. Footer */
+/* -------------------------------------- */
+.footer {
+    background-color: var(--color-primary);
+    color: #e5e7eb;
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+/* -------------------------------------- */
+/* 9. Responsiveness (Mobile First Adjustments) */
+/* -------------------------------------- */
+@media (max-width: 1024px) {
+    /* Tablet/Medium Screens */
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .hero-actions {
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+    .about-content {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Small Tablet/Mobile Screens */
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .section-subtitle {
+        margin-bottom: 3rem;
+    }
+
+    /* Navbar Mobile Activation */
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-background-card);
+        box-shadow: var(--shadow-lg);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    
+    #menu-toggle:checked ~ .nav-menu {
+        max-height: 400px; 
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+    
+    .nav-link {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--color-border);
+        text-align: center;
+    }
+    .nav-link-contact {
+        display: block;
+        margin: 1rem 2rem 0;
+    }
+    .hamburger {
+        display: block;
+    }
+    
+    /* Layout adjustments */
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    .hero-avatar {
+        width: 280px;
+        height: 280px;
+    }
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-content {
+        padding: 2rem;
+    }
+    .contact-info-card h4, .contact-form h4 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 550px) {
+    /* Smallest Mobile Devices */
+    .container {
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .hero-role {
+        font-size: 1.3rem;
+    }
+    .hero-avatar {
+        width: 200px;
+        height: 200px;
+        border-width: 5px;
+    }
+    .about-stats {
+        grid-template-columns: 1fr; /* Stack stats vertically on small mobile */
+    }
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .btn {
+        width: 100%; /* Ensure both buttons are full width when stacked */
+    }
+    .project-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+/* -------------------------------------- */
+/* 10. Keyframe Animations */
+/* -------------------------------------- */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
